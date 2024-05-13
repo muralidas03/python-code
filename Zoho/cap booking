@@ -1,0 +1,44 @@
+import datetime
+
+# A dictionary to store user data
+users = {}
+# A dictionary to store cab bookings
+bookings = {}
+
+# Function to register a user
+def register_user(username, password):
+    if username in users:
+        return "Username already exists."
+    else:
+        users[username] = password
+        return "User registered successfully."
+
+# Function to book a cab
+def book_cab(username, pickup_location, drop_location, pickup_time):
+    if username not in users:
+        return "User not found. Please register."
+    else:
+        booking_id = len(bookings) + 1
+        bookings[booking_id] = {
+            'username': username,
+            'pickup_location': pickup_location,
+            'drop_location': drop_location,
+            'pickup_time': pickup_time,
+            'booking_time': datetime.datetime.now()
+        }
+        return f"Cab booked successfully. Your booking ID is {booking_id}."
+
+# Function to calculate fare (simple calculation based on distance)
+def calculate_fare(pickup_location, drop_location):
+    # Assuming each unit distance costs 100
+    distance = len(pickup_location) + len(drop_location) # Simplified distance calculation
+    fare = distance * 10
+    return f"The total fare is RS{fare}."
+
+# Example usage
+print(register_user(input("Enter a User name :"), input("Enter a User password :")))
+# print(book_cab('john_doe', '123 Main St', '456 Elm St', '2024-05-07 15:00'))
+book_cab1=book_cab(input("Enter A NAme :"),input("Enter You Pick Up Location : "),input("Enter a drop_loc : "),int(input("Enter a Pic_Up timr: ")))
+print(calculate_fare('123 Main St', '456 Elm St'))
+print(users)
+print(bookings)
